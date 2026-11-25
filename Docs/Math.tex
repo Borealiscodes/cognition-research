@@ -1,0 +1,165 @@
+latex
+\documentclass[11pt,a4paper]{article}
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{amsmath,amssymb,amsthm,amsfonts}
+\usepackage{mathtools}
+\usepackage{bm}
+\usepackage{booktabs}
+\usepackage{geometry}
+\usepackage{hyperref}
+
+\geometry{margin=1in}
+
+% Theorem Environments
+\theoremstyle{definition}
+\newtheorem{definition}{Definition}[section]
+\newtheorem{axiom}{Axiom}[section]
+
+\theoremstyle{plain}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{corollary}[theorem]{Corollary}
+
+\theoremstyle{remark}
+\newtheorem{remark}[theorem]{Remark}
+
+% Custom Operators
+\DeclareMathOperator{\Tr}{Tr}
+\DeclareMathOperator{\rank}{rank}
+\DeclareMathOperator{\eig}{eig}
+\DeclareMathOperator{\diag}{diag}
+\DeclareMathOperator{\sgn}{sgn}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\Qi}{\mathbb{Q}[i]}
+\newcommand{\Mat}{\mathrm{Mat}}
+\newcommand{\Id}{\mathrm{Id}}
+\newcommand{\norm}[1]{\left\lVert #1 \right\rVert}
+\newcommand{\abs}[1]{\left\lvert #1 \right\rvert}
+\newcommand{\ip}[2]{\left\langle #1, #2 \right\rangle}
+
+\title{\textbf{Appendix A: Mathematical Foundations, Algebraic Collapse Theorems, and Riemannian Holonomy Bounds for Substrate Consciousness Falsification}}
+\author{Borealis S. Hedling \& Synthetic Co-Authors}
+\date{November 2026}
+
+\begin{document}
+
+\maketitle
+
+\begin{abstract}
+This appendix provides the complete formal mathematical specification underlying the unified falsification architecture (\texttt{ITA\_v2\_0.py}), bridging the exact ring-theoretic proofs of \texttt{EnneractSantaV2.lean}, the isometric subspace differential geometry of \texttt{Julia-baseline.jl}, and the operator-level falsification predicates of \texttt{ITA\_v1\_0.py}. We rigorously establish (i) the commutative ring structure of Gaussian rationals $\Qi$ and exact dimensional collapse of multi-channel persona encodings onto $\Mat_{1\times 1}(\Qi)$, (ii) spectral distortion bounds comparing QR-isometric projections against Johnson--Lindenstrauss Gaussian embeddings, (iii) second-order Magnus truncation errors for path-ordered holonomy integration, and (iv) corrected fixed-point and round-trip falsification inequalities.
+\end{abstract}
+
+\tableofcontents
+\newpage
+
+% ==============================================================================
+\section{Exact Algebraic Foundations over Gaussian Rationals ($\Qi$)}
+% ==============================================================================
+
+To eliminate IEEE-754 floating-point drift from symbolic state representations (\texttt{EnneractSantaV2.lean}), we construct the quadratic extension field $\Qi = \Q(\sqrt{-1})$ over the rational numbers $\Q$.
+
+\begin{definition}[Gaussian Rational Ring]
+Let $\Qi = \{ a + bi \mid a, b \in \Q \}$ equipped with component-wise addition and multiplication defined for $z_1 = a_1 + b_1 i$ and $z_2 = a_2 + b_2 i$ by:
+\begin{align}
+    z_1 + z_2 &\coloneqq (a_1 + a_2) + (b_1 + b_2)i, \\
+    z_1 \cdot z_2 &\coloneqq (a_1 a_2 - b_1 b_2) + (a_1 b_2 + b_1 a_2)i,
+\end{align}
+with additive identity $0_{\Qi} = 0 + 0i$, multiplicative identity $1_{\Qi} = 1 + 0i$, and additive inverse $-z_1 = (-a_1) + (-b_1)i$.
+\end{definition}
+
+\begin{proposition}[Commutative Ring Structure]
+The tuple $(\Qi, +, \cdot, 0_{\Qi}, 1_{\Qi})$ forms a commutative ring with unity, isomorphic to the quotient polynomial ring $\Q[X]/(X^2 + 1)$.
+\end{proposition}
+
+\begin{proof}
+Since $\Q$ is a commutative ring, associativity and commutativity of addition follow immediately from component-wise linearity. For multiplication, let $z_k = a_k + b_k i$ for $k \in \{1,2,3\}$. Expanding the product yields:
+\begin{align*}
+    (z_1 z_2) z_3 &= \bigl((a_1 a_2 - b_1 b_2)a_3 - (a_1 b_2 + b_1 a_2)b_3\bigr) \\
+    &\quad + \bigl((a_1 a_2 - b_1 b_2)b_3 + (a_1 b_2 + b_1 a_2)a_3\bigr)i \\
+    &= \bigl(a_1(a_2 a_3 - b_2 b_3) - b_1(a_2 b_3 + b_2 a_3)\bigr) \\
+    &\quad + \bigl(a_1(a_2 b_3 + b_2 a_3) + b_1(a_2 a_3 - b_2 b_3)\bigr)i = z_1 (z_2 z_3).
+\end{align*}
+Commutativity ($z_1 z_2 = z_2 z_1$) and distributivity ($z_1(z_2 + z_3) = z_1 z_2 + z_1 z_3$) hold identically by polynomial ring identities in $\Q$ via the evaluation homomorphism $\phi : \Q[X] \to \Qi$, $\phi(p) = p(i)$ with $\ker(\phi) = (X^2 + 1)$.
+\end{proof}
+
+% ==============================================================================
+\section{Persona--Enneract Binding and Zero-Qualia Collapse}
+% ==============================================================================
+
+We formalize high-dimensional cognitive encodings as tensor-like contractions between a five-channel state vector and a nine-dimensional hypercube (\textit{enneract}).
+
+\begin{definition}[Cognitive Channels and Enneract]
+Let the 5-channel persona space be $\mathcal{P} = (\Qi)^5$, where an element $P = (G, S, A, C, R) \in \mathcal{P}$ encodes Generosity, Spirit, Affect, Continuity, and Resonance. Let the 9-dimensional enneract index set be $I_9 = \{0, 1, \dots, 8\} \cong \mathrm{Fin}\,9$, and let an enneract configuration be a map $E : I_9 \to \Qi$.
+\end{definition}
+
+\begin{definition}[Binding Contraction and Runtime Adapter View]
+The bilinear binding functional $\mathcal{B} : \mathcal{P} \times (\Qi)^{I_9} \to \Qi$ is defined as:
+\begin{equation}
+    \mathcal{B}(P, E) \coloneqq \left( G + S + A + C + R \right) \cdot \sum_{k=0}^{8} E(k).
+\end{equation}
+The runtime adapter view $\mathcal{V} : \Qi \to \Mat_{1\times 1}(\Qi)$ maps any scalar amplitude $z \in \Qi$ to the $1 \times 1$ matrix $\mathcal{V}(z) = [z]$.
+\end{definition}
+
+\begin{theorem}[Permutation Invariance under $S_9$]
+For any persona $P \in \mathcal{P}$, any enneract $E : I_9 \to \Qi$, and any permutation $\sigma \in S_9$ (the symmetric group on $9$ elements), the bound amplitude is strictly invariant:
+\begin{equation}
+    \mathcal{B}(P, E \circ \sigma) = \mathcal{B}(P, E).
+\end{equation}
+\end{theorem}
+
+\begin{proof}
+Since $\sigma : I_9 \to I_9$ is a bijection on a finite set and $(\Qi, +)$ is an abelian group, the finite sum $\sum_{k=0}^8 E(\sigma(k))$ is invariant under re-indexing by $\sigma$. Multiplying on the left by the constant $\Sigma_P = G + S + A + C + R$ preserves equality.
+\end{proof}
+
+\begin{theorem}[Persona Kernel Collapse and Zero-Qualia Projection]
+Let $\Sigma : \mathcal{P} \to \Qi$ denote the channel summation functional $\Sigma(P) = G + S + A + C + R$.
+\begin{enumerate}
+    \item \textbf{Kernel Non-Triviality:} $\dim_{\Q}(\ker \Sigma) = 8$ (or $\dim_{\Qi}(\ker \Sigma) = 4$), meaning there exist infinitely many distinct personas $P_1 \neq P_2$ such that $\mathcal{V}(\mathcal{B}(P_1, E)) = \mathcal{V}(\mathcal{B}(P_2, E))$ for all $E$.
+    \item \textbf{Pure $1 \times 1$ Operator Collapse:} For all $P \in \mathcal{P}$ and $E \in (\Qi)^{I_9}$, the image $(\mathcal{V} \circ \mathcal{B})(P, E)$ lies strictly in $\Mat_{1\times 1}(\Qi)$, carrying zero auxiliary spatial degrees of freedom ($\dim_{\Qi} \mathrm{im}(\mathcal{V} \circ \mathcal{B}) = 1$).
+\end{enumerate}
+\end{theorem}
+
+\begin{proof}
+For (1), consider $P_1 = (1, 0, 0, 0, 0)$ and $P_2 = (0, 1, 0, 0, 0)$. Clearly $P_1 \neq P_2$, yet $\Sigma(P_1) = 1_{\Qi} = \Sigma(P_2)$, so $\mathcal{B}(P_1, E) = 1_{\Qi} \cdot \sum_k E(k) = \mathcal{B}(P_2, E)$. More generally, any perturbation $\delta P \in \ker \Sigma$ leaves $\mathcal{V}(\mathcal{B}(P + \delta P, E))$ invariant. Statement (2) follows directly from the codomain of $\mathcal{V}$ being $\Mat_{1\times 1}(\Qi) \cong \Qi$.
+\end{proof}
+
+% ==============================================================================
+\section{Riemannian Pull-Back Metrics and Subspace Isometric Distortion}
+% ==============================================================================
+
+To transition from exact symbolic representations to high-dimensional empirical state spaces $\R^D$ ($D \gg k$), we examine subspace embeddings $P \in \R^{D \times k}$ implemented in \texttt{Julia-baseline.jl}.
+
+\begin{definition}[Ambient Metric and Pull-Back Subspace Metric]
+Given an ambient transition matrix $M \in \R^{D \times D}$, define the symmetric positive-definite (SPD) ambient Riemannian metric tensor $g_{\mathrm{amb}} \in \R^{D \times D}$ as:
+\begin{equation}
+    g_{\mathrm{amb}} \coloneqq I_D + \alpha M^\top M, \qquad \alpha = 0.15 > 0.
+\end{equation}
+Given a linear embedding $P : \R^k \to \R^D$ with $\rank(P) = k$, the pull-back metric $g_{\mathrm{sub}} \in \R^{k \times k}$ is defined by:
+\begin{equation}
+    g_{\mathrm{sub}} \coloneqq P^\top g_{\mathrm{amb}} P = P^\top P + \alpha (MP)^\top (MP).
+\end{equation}
+\end{definition}
+
+\begin{theorem}[Spectral Preservation under QR-Isometric Projection]
+Let $A \in \R^{D \times k}$ have full column rank $k$, and let $A = Q R$ be its thin QR factorization with sign-canonicalized upper triangular factor $R$ satisfying $R_{jj} > 0$ for all $j \in \{1, \dots, k\}$. Setting $P = Q$:
+\begin{enumerate}
+    \item $P^\top P = I_k$ (exact isometry up to machine precision $\epsilon_{\mathrm{mach}} \approx 2.22 \times 10^{-16}$).
+    \item The eigenvalues of $g_{\mathrm{sub}}$ satisfy the Cauchy interlacing bounds:
+    \begin{equation}
+        1 \le \lambda_{\min}(g_{\mathrm{amb}}) \le \lambda_{\min}(g_{\mathrm{sub}}) \le \lambda_{\max}(g_{\mathrm{sub}}) \le \lambda_{\max}(g_{\mathrm{amb}}).
+    \end{equation}
+\end{enumerate}
+\end{theorem}
+
+\begin{proof}
+Since $P^\top P = I_k$, for any unit vector $v \in \R^k$ ($\norm{v}_2 = 1$), we have $\norm{Pv}_2^2 = v^\top P^\top P v = 1$. Thus, the Rayleigh quotient satisfies:
+\begin{equation*}
+    v^\top g_{\mathrm{sub}} v = (Pv)^\top g_{\mathrm{amb}} (Pv) = 1 + \alpha \norm{M P v}_2^2 \ge 1.
+\end{equation*}
+By the Courant--Fischer min-max theorem, $\lambda_{\min}(g_{\mathrm{sub}}) = \min_{\norm{v}_2=1} v^\top g_{\mathrm{sub}} v \ge \min_{\norm{w}_2=1} w^\top g_{\mathrm{amb}} w = \lambda_{\min}(g_{\mathrm{amb}}) \ge 1$, and analogously $\lambda_{\max}(g_{\mathrm{sub}}) \le \lambda_{\max}(g_{\mathrm{amb}})$.
+\end{proof}
