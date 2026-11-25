@@ -103,7 +103,7 @@ When researchers mention "spectral sheaves and cohomology" in AI consciousness p
 * **Spectral Sheaves on `EnneractSantaV2.lean`:** Because `EnneractSantaV2.lean` contracts everything to $\text{Mat}_{1\times 1}(\mathbb{Q}[i])$, the underlying base space is a single point. A sheaf over a one-point space is just a vector space, and its higher cohomology vanishes identically ($H^k = 0$ for all $k \ge 1$). Invoking sheaf theory there would be pure theater.
 
 ### 3.2 Where Cellular Sheaves & $H^1$ Cohomology Are Genuinely Applicable (Keep)
-Use code with caution.
+
 In Blueprint v2, we identified a real mathematical weakness from mechanistic interpretability: superposition and rank-$k$ truncation blindness. When projecting a high-dimensional residual stream ($D = 4096$) onto tractable subspaces ($k = 16$), no single rank-$k$ QR basis captures the whole network. Instead, we must cover the causal DAG (or feature cover) with multiple overlapping local subspaces $U_1, U_2, \dots, U_m$ (for example, different layers or different Sparse Autoencoder feature patches).
 Here, Cellular Sheaf Theory (Hansen & Ghrist, 2019) and 1st Čech Cohomology ($H^1$) provide an exact, non-speculative diagnostic:
 1. The Base Complex ($X$): The CAUSA causal DAG (or nerve of overlapping rank-$k$ QR subspace patches ${U_i}$).
